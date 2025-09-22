@@ -2,13 +2,59 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>너에게 보내는 목소리</title>
+    <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          text-align: center;
+          margin: 0;
+          padding: 20px;
+          background-color: #fffafc;
+        }
+
+        h1 {
+          font-size: 1.8rem; /* 모바일에서도 크게 보이게 */
+          margin-bottom: 30px;
+          color: #333;
+        }
+
+        audio {
+          width: 90%;   /* 화면 너비 거의 꽉 차게 */
+          max-width: 500px; /* 너무 넓어지지 않도록 제한 */
+          height: 50px; /* 플레이어 높이 */
+        }
+
+        #thankyou {
+          font-size: 1.2rem;
+          margin-top: 20px;
+          color: #555;
+          opacity: 0; /* 처음에는 안 보이게 */
+          transition: opacity 1s;
+        }
+
+        #thankyou.show {
+          opacity: 1; /* 보이도록 */
+        }
+    </style>
 </head>
 <body style="text-align:center; font-family:sans-serif; margin-top:50px;">
-  <h2>하영이를 위한 편지 💌</h2>
-  <audio controls>
+  <h1>하영이를 위한 편지 💌</h1>
+  <audio id="voice" controls>
       <source src="adventure.m4a" type="audio/mpeg">
       브라우저에서 오디오를 지원하지 않아요.
   </audio>
+
+  <p id="thankyou">QR 찍고 들어줘서 고마워 💕</p>
+
+  <script>
+      var audio = document.getElementById('voice');
+      var thankyou = document.getElementById('thankyou');
+
+      // 오디오 재생이 끝나면 메시지 나타나게
+      audio.addEventListener('ended', function(){
+        thankyou.classList.add('show');
+      });
+  </script>
 </body>
 </html>
